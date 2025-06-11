@@ -30,7 +30,7 @@ jobs:
           pyinstaller src/main.py --name "PsychManager" --onefile --noconsole
 
       - name: Upload EXE
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PsychManager
           path: dist/PsychManager.exe

@@ -1,0 +1,32 @@
+name: Build macOS App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'  # or your preferred version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyqt6 pyinstaller
+
+    - name: Build macOS app with PyInstaller
+      run: |
+        pyinstaller --onefile --windowed src/main.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: psych-practice-macos
+        path: dist/
